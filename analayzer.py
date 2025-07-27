@@ -1,11 +1,8 @@
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api.formatters import TextFormatter
-import httpx
 import base64
 from io import BytesIO
-from pydantic import BaseModel, Field
 from langchain_community.chat_models import ChatOpenAI
-from langchain.output_parsers import PydanticOutputParser
 from langchain.chains import TransformChain
 from langchain.schema import SystemMessage, HumanMessage
 import yt_dlp

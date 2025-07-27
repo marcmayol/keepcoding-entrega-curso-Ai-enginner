@@ -1,9 +1,5 @@
 import streamlit as st
-import requests
-from PIL import Image
-from io import BytesIO
-import yt_dlp
-from click import style
+
 
 import analayzer
 from dotenv import load_dotenv
