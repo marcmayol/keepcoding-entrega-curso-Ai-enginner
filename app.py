@@ -23,7 +23,7 @@ if "comparacion" not in st.session_state:
     st.session_state.loader= False
     st.session_state.portada = False
 
-st.title("Analizador de Miniaturas de YouTube")
+st.title("Analizador de competencia en YouTube")
 
 url = st.text_input("Introduce la URL del vídeo de YouTube")
 
@@ -52,7 +52,7 @@ with col2:
 with col3:
     if st.button("Comparar portadas"):
         if url:
-            st.session_state.mostrar_comparacion = True
+            st.session_state.comparacion = True
         else:
             st.error("Por favor, introduce una URL válida de YouTube")
 
@@ -98,13 +98,13 @@ if not result and st.session_state.loader:
 if st.session_state.comparacion and url:
     miniatura_url = analayzer.get_video_info(url).get("thumbnail")
     imagen1 = analayzer.descargar_imagen(miniatura_url)
-    comparacion = st.text_input("Introduce la URL del vídeo de YouTube")
+    comparacion = st.text_input("Introduce la URL de tu vídeo de YouTube")
     ejecutar = st.button("Comparar")
     if comparacion:
         miniatura_url = analayzer.get_video_info(comparacion).get("thumbnail")
         imagen2 = analayzer.descargar_imagen(miniatura_url)
-        st.image([imagen1, imagen2], caption=["Miniatura", "Imagen subida"], width=300)
-        result = analayzer.thumbnail_analysis_versus(url)
+        st.image([imagen1, imagen2], caption=["Miniatura", "Tu Miniatura"], width=300)
+        result = analayzer.thumbnail_analysis_versus(url, comparacion)
         if ejecutar:
             iguales = comparar_imagenes(imagen1, imagen2)
             if iguales:

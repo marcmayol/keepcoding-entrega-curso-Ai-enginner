@@ -76,10 +76,11 @@ def thumbnail_analysis(video_url, model="gpt-4o"):
         return response.choices[0].message.content
     except Exception as e:
         raise Exception(f"Error al enviar la imagen a GPT-4o: {str(e)}")
-def humbnail_analysis_versus(video_url1, video_url2):
+
+def thumbnail_analysis_versus(video_url1, video_url2):
     try:
-        thumbnail1 = thumbnail_analysis(video_url1).get('thumbnail')
-        thumbnail2 = thumbnail_analysis(video_url2).get('thumbnail')
+        thumbnail1 = thumbnail_analysis(video_url1)
+        thumbnail2 = thumbnail_analysis(video_url2)
         video_content_messages = [
             SystemMessage(content="Actúa como un experto en contenido de YouTube con 15 años de experiencia muy crítico. Compara estas dos criticas miniaturas de vídeo de YouTube. ¿Qué transmite visualmente?  Responde con un resumen del análisis, lista lomejora de la primera imagen, lista lo mejor de al segunda, y detalla las diferencias entre ambas e idica cual es mejor"),
             HumanMessage(content=f"critica miniatura 1: {thumbnail1}, critica miniatura 2: {thumbnail2}")
