@@ -96,29 +96,25 @@ if st.session_state.comparacion and url:
     imagen1 = analayzer.descargar_imagen(miniatura_url)
     comparacion = st.text_input("Introduce la URL de tu vídeo de YouTube")
     ejecutar = st.button("Comparar")
-    if comparacion:
-        miniatura_url = analayzer.get_video_info(comparacion).get("thumbnail")
-        imagen2 = analayzer.descargar_imagen(miniatura_url)
-        st.image([imagen1, imagen2], caption=["Miniatura", "Tu Miniatura"], width=300)
-        result = analayzer.thumbnail_analysis_versus(url, comparacion)
-        if ejecutar:
-            iguales = comparar_imagenes(imagen1, imagen2)
-            if iguales:
-                st.success("Las imágenes son iguales (visualmente muy parecidas)")
-            else:
-                st.warning("Las imágenes son diferentes")
+    if ejecutar:
+        if comparacion:
+            miniatura_url = analayzer.get_video_info(comparacion).get("thumbnail")
+            imagen2 = analayzer.descargar_imagen(miniatura_url)
+            st.image([imagen1, imagen2], caption=["Miniatura", "Tu Miniatura"], width=300)
+            result = analayzer.thumbnail_analysis_versus(url, comparacion)
 
 
-if result:
-    if st.session_state.full_result:
+
+if st.session_state.full_result:
         st.subheader("🧠 Análisis de la miniatura")
         st.write(result.get("thumb_analysis"))
         st.subheader("🤖 Análisis del contenido")
         st.write(result.get("content_analysis"))
 
-    elif  st.session_state.portada:
+elif  st.session_state.portada:
         st.subheader("🧠 Análisis de la miniatura")
         st.write(result)
-    elif st.session_state.comparacion:
+
+elif st.session_state.comparacion:
         st.subheader("🧠 Análisis de la comparación")
         st.write(result)
